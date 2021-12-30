@@ -2,12 +2,15 @@ name: Deploy main branch to prod
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
   DeployToGHPages:
     name: Deploy to github-pages
+    if: ${{ github.ref == 'refs/heads/main' }}
     environment: 
       name: github-pages
     runs-on: ubuntu-20.04
@@ -37,7 +40,6 @@ jobs:
 
       - name: Deploy React app
         uses: peaceiris/actions-gh-pages@v3
-        if: ${{ github.ref == 'refs/heads/main' }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
