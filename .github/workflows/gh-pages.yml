@@ -6,10 +6,10 @@ on:
   workflow_dispatch:
 
 jobs:
-  DeployToProd:
-    name: Deploy to prod
+  DeployToGHPages:
+    name: Deploy to github-pages
     environment: 
-      name: production
+      name: github-pages
     runs-on: ubuntu-20.04
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Approved
-        run: echo Deploying to Production environment
+        run: echo Deploying to GitHub Pages
 
       - name: Setup Node
         uses: actions/setup-node@v2
@@ -35,7 +35,7 @@ jobs:
       - run: npm ci
       - run: npm run build
 
-      - name: Deploy react app
+      - name: Deploy React app
         uses: peaceiris/actions-gh-pages@v3
         if: ${{ github.ref == 'refs/heads/main' }}
         with:
