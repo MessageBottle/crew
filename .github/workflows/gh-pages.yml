@@ -1,4 +1,4 @@
-name: Deploy main branch to prod
+name: Deploy main to prod
 
 on:
   push:
@@ -8,8 +8,9 @@ on:
   workflow_dispatch:
 
 jobs:
-  DeployToGHPages:
+  DeployToGitHubPages:
     name: Deploy to github-pages
+    if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-20.04
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
@@ -32,10 +33,9 @@ jobs:
       - run: npm ci
       - run: npm run build
 
-      - name: Deploy React app
+      - name: Push build to gh-pages branch and trigger Deployment
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          if: ${{ github.ref == 'refs/heads/main' }}
           publish_dir: ./build
           commit_message: ${{ github.event.head_commit.message }}
