@@ -2,16 +2,25 @@ name: GitHub Pages
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   pull_request:
 
 jobs:
-  DeployToProd:
-    name: Deploy to Production environment
-    runs-on: ubuntu-20.04
+  GetApproval:
+    name: Wait for approval to deploy to Production environment
+    runs-on: ubuntu-latest
     environment: 
       name: github-pages
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Approved
+        run: echo Deploying to Production environment
+    
+  DeployToProd:
+    name: Deploy to Production environment
+    needs: [GetApproval]
+    runs-on: ubuntu-20.04
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
     steps:
