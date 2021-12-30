@@ -10,17 +10,11 @@ on:
 jobs:
   DeployToGHPages:
     name: Deploy to github-pages
-    if: ${{ github.ref == 'refs/heads/main' }}
-    environment: 
-      name: github-pages
     runs-on: ubuntu-20.04
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
     steps:
       - uses: actions/checkout@v2
-
-      - name: Approved
-        run: echo Deploying to GitHub Pages
 
       - name: Setup Node
         uses: actions/setup-node@v2
@@ -42,5 +36,6 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          if: ${{ github.ref == 'refs/heads/main' }}
           publish_dir: ./build
           commit_message: ${{ github.event.head_commit.message }}
