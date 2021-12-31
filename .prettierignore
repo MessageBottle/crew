@@ -1,14 +1,14 @@
 # Ignore .github folder
-./.github/**/*
+.github/**/*
 
 # Ignore
-./LICENSE
+LICENSE
 
 # Ignore
-./package-lock.json
+package-lock.json
 
 # Ignore
-./node_modules/**/*
+node_modules/**/*
 
 # Ignore public folder
-./public/**/*
+public/**/*
