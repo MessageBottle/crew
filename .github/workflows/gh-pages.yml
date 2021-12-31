@@ -1,4 +1,4 @@
-name: Update gh-pages branch
+name: gh-pages
 
 on:
   push:
