@@ -35,7 +35,7 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    if: ${{ success() }}
+    needs: [ TestWithNodeJS ]
 
     steps:
       - uses: actions/checkout@v2
