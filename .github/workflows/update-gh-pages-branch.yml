@@ -1,4 +1,4 @@
-name: Deploy main to prod
+name: Update gh-pages branch
 
 on:
   push:
@@ -25,13 +25,13 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'npm'
+
     - run: npm ci
     - run: npm run build
     # - run: npm test
 
-  DeployToGitHubPages:
-    name: Deploy to GitHub Pages
+  UpdateGHPages:
+    name: Update gh-pages branch
 
     runs-on: ubuntu-latest
 
