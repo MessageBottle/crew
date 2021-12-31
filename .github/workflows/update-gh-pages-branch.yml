@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  CallTestWithNodeJSWorkflow:
+  Node-js-CI:
     uses: MessageBottle/crew/.github/workflows/node.js.yml@main
 
   UpdateGHPages:
@@ -14,7 +14,7 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    needs: [ CallTestWithNodeJSWorkflow ]
+    needs: [ Node-js-CI ]
 
     steps:
       - uses: actions/checkout@v2
