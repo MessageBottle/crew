@@ -18,5 +18,5 @@ jobs:
         GITHUB_TOKEN: ${{ github.token }}
       with:
         message: |
-          Did someone just request for `.take` ? :astonished:. Hmmmm.............. &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; interesting :thinking:  
+          Did someone just request for `.take` ? :astonished:. Mm-hmm . . . . interesting :thinking:  
           I sense someone pumped up with enthusiasm :fire::fire:.
