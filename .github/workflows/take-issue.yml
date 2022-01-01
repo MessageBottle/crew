@@ -17,4 +17,5 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ github.token }}
       with:
-        message: "Oh!!!, I sense someone pumped up with enthusiasm. Stage is all yours my friend."
+        message: |
+          Oh!!!, I sense someone pumped up with enthusiasm :fire:. Stage is all yours my friend.
