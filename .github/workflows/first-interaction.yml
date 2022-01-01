@@ -28,19 +28,21 @@ jobs:
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           issue-message: |
-            'Welcome to Crew! :smiley:,  
-            Thank you for making efforts to reach us.  
-            This might take several days We will leave :eyes: emoji on your issue once we have read.
+            Welcome to Crew! :smiley:,  
             
-            - Aman Godara'
+            Thank you for making efforts to reach us.  
+            Responding back might take us some sometime :innocent:, we try our best.
+            We will leave :eyes: emoji on your issue description at the top once we have read it.  
+            
+            \- Aman Godara
           pr-message: |
-            'Welcome to Crew! :smiley:,  
+            Welcome to Crew! :smiley:,  
+            
             Congrats :clap: on making efforts to improve Crew by opening your first pull request (PR).  
             
             Please read the instructions given below to help you on this journey  
             :arrow_forward:  [first time contributors](https://www.google.com)  
             
             
-            A big thanks to you :heart: from all the users of Crew
-            
-            - Aman Godara'
+            A big thanks to you :heart: from all the users of Crew  
+            \- Aman Godara
