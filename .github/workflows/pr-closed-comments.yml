@@ -1,0 +1,45 @@
+name: PR closed comments
+
+# Controls when the workflow will run
+on:
+  pull_request:
+    branches: [ main ]
+    types: [ closed, reopened ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  PRClosedComments:
+    name: PR closed comments
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - name: Congratulate on PR merged
+        if: ${{ github.event.pull_request.merged }}
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: PRClosed
+          recreate: true
+          message: |
+            Now that's an achievement :trophy:. Bye! Bye! :wave:, will meet again in your next PR :wink:.
+
+      - name: Console on PR rejected
+        if: ${{ !github.event.pull_request.merged && github.event.pull_request.state == "closed" }}
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: PRClosed
+          recreate: true
+          message: |
+            Ahhh! :broken_heart:, you are not alone this has happened with me in past too.
+
+      - name: Console on PR rejected
+        if: ${{ !github.event.pull_request.merged && github.event.pull_request.state != "closed" }}
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: PRClosed
+          delete: true
