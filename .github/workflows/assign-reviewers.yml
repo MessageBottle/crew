@@ -1,0 +1,23 @@
+# Workflow to assign CODEOWNERS as reviewers
+# Finalised, will run independently of others
+name: Assign reviewers
+
+on:
+  # be cautious with pull_request_target
+  pull_request_target:
+    branches: [ main ]
+    types:
+      [ opened, ready_for_review, synchronize ]
+
+jobs:
+  AssignReviewers:
+    name: Assign reviewers
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Assign reviewers based upon files changed
+        if: ${{ !github.event.pull_request.draft }}
+        uses: kentaro-m/auto-assign-action@v1.2.1
+        with:
+          configuration-path: 'CODEOWNERS/assign-by-files.yml'

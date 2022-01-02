@@ -1,0 +1,44 @@
+# Workflow to congrtulate or console when PR is closed (merged/rejected)
+# Finalised, will run independently of others
+name: PR closed comments
+
+on:
+  # be cautious with pull_request_target
+  pull_request_target:
+    branches: [ main ]
+    types: [ closed, reopened ]
+
+jobs:
+  PRClosedComments:
+    name: PR closed comments
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Congratulate on PR merged
+        if: ${{ github.event.pull_request.merged }}
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          GITHUB_TOKEN: ${{ github.token }}
+          header: PRClosed
+          recreate: true
+          message: |
+            Now that's an achievement :trophy:. Bye! Bye! :wave:, will meet again in your next PR :wink:.
+
+      - name: Console on PR rejected
+        if: ${{ !github.event.pull_request.merged && github.event.pull_request.state == 'closed' }}
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          GITHUB_TOKEN: ${{ github.token }}
+          header: PRClosed
+          recreate: true
+          message: |
+            Ahhh! :broken_heart:, you are not alone this has happened with me in past too.
+
+      - name: PR is re-opened
+        if: ${{ !github.event.pull_request.merged && github.event.pull_request.state != 'closed' }}
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          GITHUB_TOKEN: ${{ github.token }}
+          header: PRClosed
+          delete: true
