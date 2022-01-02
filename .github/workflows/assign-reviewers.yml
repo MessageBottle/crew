@@ -20,4 +20,4 @@ jobs:
         uses: necojackarc/auto-request-review@v0.7.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          config: CODEOWNERS/pr-reviewers.yml
+          config: docs/pr-reviewers.yml
