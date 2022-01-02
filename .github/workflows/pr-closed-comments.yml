@@ -20,7 +20,6 @@ jobs:
         if: ${{ github.event.pull_request.merged }}
         uses: marocchino/sticky-pull-request-comment@v2
         with:
-          GITHUB_TOKEN: ${{ github.token }}
           header: PRClosed
           recreate: true
           message: |
@@ -30,7 +29,6 @@ jobs:
         if: ${{ !github.event.pull_request.merged && github.event.pull_request.state == 'closed' }}
         uses: marocchino/sticky-pull-request-comment@v2
         with:
-          GITHUB_TOKEN: ${{ github.token }}
           header: PRClosed
           recreate: true
           message: |
@@ -40,6 +38,5 @@ jobs:
         if: ${{ !github.event.pull_request.merged && github.event.pull_request.state != 'closed' }}
         uses: marocchino/sticky-pull-request-comment@v2
         with:
-          GITHUB_TOKEN: ${{ github.token }}
           header: PRClosed
           delete: true
