@@ -1,0 +1,15 @@
+---
+# you can use glob pattern
+"**/*.js":
+  - Aman-Godara
+
+".github/workflows/*.yml":
+  - Aman-Godara
+
+"CODEOWNERS/**/*":
+  - Aman-Godara
+
+# you can set multiple reviewers
+#".github/**/*.yml":
+#  - foo
+#  - bar
