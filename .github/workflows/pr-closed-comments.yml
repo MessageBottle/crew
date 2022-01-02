@@ -1,3 +1,5 @@
+# Workflow for first interaction
+# Finalised, will run independently of others
 name: PR closed comments
 
 # Controls when the workflow will run
@@ -20,6 +22,7 @@ jobs:
         if: ${{ github.event.pull_request.merged }}
         uses: marocchino/sticky-pull-request-comment@v2
         with:
+          GITHUB_TOKEN: ${{ github.token }}
           header: PRClosed
           recreate: true
           message: |
@@ -29,14 +32,16 @@ jobs:
         if: ${{ !github.event.pull_request.merged && github.event.pull_request.state == 'closed' }}
         uses: marocchino/sticky-pull-request-comment@v2
         with:
+          GITHUB_TOKEN: ${{ github.token }}
           header: PRClosed
           recreate: true
           message: |
             Ahhh! :broken_heart:, you are not alone this has happened with me in past too.
 
-      - name: Console on PR rejected
+      - name: PR is re-opened
         if: ${{ !github.event.pull_request.merged && github.event.pull_request.state != 'closed' }}
         uses: marocchino/sticky-pull-request-comment@v2
         with:
+          GITHUB_TOKEN: ${{ github.token }}
           header: PRClosed
           delete: true
