@@ -2,7 +2,7 @@ name: PR closed comments
 
 # Controls when the workflow will run
 on:
-  pull_request:
+  pull_request_target:
     branches: [ main ]
     types: [ closed, reopened ]
 
@@ -16,13 +16,11 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-
       - name: Congratulate on PR merged
         if: ${{ github.event.pull_request.merged }}
         uses: marocchino/sticky-pull-request-comment@v2
         with:
+          GITHUB_TOKEN: ${{ github.token }}
           header: PRClosed
           recreate: true
           message: |
@@ -32,6 +30,7 @@ jobs:
         if: ${{ !github.event.pull_request.merged && github.event.pull_request.state == 'closed' }}
         uses: marocchino/sticky-pull-request-comment@v2
         with:
+          GITHUB_TOKEN: ${{ github.token }}
           header: PRClosed
           recreate: true
           message: |
@@ -41,5 +40,6 @@ jobs:
         if: ${{ !github.event.pull_request.merged && github.event.pull_request.state != 'closed' }}
         uses: marocchino/sticky-pull-request-comment@v2
         with:
+          GITHUB_TOKEN: ${{ github.token }}
           header: PRClosed
           delete: true
