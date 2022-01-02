@@ -38,7 +38,7 @@ jobs:
             Ahhh! :broken_heart:, you are not alone this has happened with me in past too.
 
       - name: Console on PR rejected
-        if: ${{ !github.event.pull_request.merged && github.event.pull_request.state != "closed" }}
+        if: ${{ !github.event.pull_request.merged && github.event.pull_request.state != 'closed' }}
         uses: marocchino/sticky-pull-request-comment@v2
         with:
           header: PRClosed
