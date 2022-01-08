@@ -1,12 +1,20 @@
-import React from 'react'
-import './App.css'
+import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+
+import Layout from './components/Layout/Layout';
+import Home from './pages/Home/Home';
+
+import './App.css';
 
 function App() {
+
     return (
-        <div className="App">
-            Hello There this is the final message hopefully
-        </div>
-    )
+        <Layout>
+            <BrowserRouter>
+                <Home />
+            </BrowserRouter>
+        </Layout>
+    );
 }
 
-export default App
+export default App;
