@@ -1,19 +1,19 @@
 import React from 'react';
 
-import { openInNewTab } from '../../utils/utils';
+// import { openInNewTab } from '../../utils/utils';
 
 import './Home.css';
 
 const Home = () => {
     return (
         <div>
-            <a
+            {/* <a
                 className="link"
                 onClick={() => {
                     openInNewTab(process.env.REACT_APP_CREW_REPO_URL);
                 }}
             >
-            </a>
+            </a> */}
         </div>
     );
 };

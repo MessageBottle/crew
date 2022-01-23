@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { Col, Container, Nav, Navbar } from 'react-bootstrap';
 
 import Auth from '../../components/Auth/Auth';
@@ -7,7 +7,7 @@ import Search from '../../components/Search/Search';
 import OffCanvas from './OffCanvas/OffCanvas';
 
 const Header = () => {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     return (
         <Navbar

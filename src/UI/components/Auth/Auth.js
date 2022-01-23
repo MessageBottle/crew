@@ -1,18 +1,18 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { toast } from 'react-toastify';
 import Avatar from 'react-avatar';
 
 import { auth, signIn, signOut } from '../../../firebase/OAuth';
-import { userSignedIn } from '../../store/actions';
+// import { userSignedIn } from '../../store/actions';
 
 import { Button, Dropdown, Spinner } from 'react-bootstrap';
 import { openInNewTab } from '../../utils/utils';
 
 const Auth = () => {
     const [user, initialising] = useAuthState(auth);
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
     useEffect(() => {
         if (user) {
