@@ -1,9 +1,8 @@
 import React from 'react';
 import { ToastContainer, Slide } from 'react-toastify';
 
-import Auth from '../Auth/Auth';
-
 import 'react-toastify/dist/ReactToastify.css';
+import Header from './Header/Header';
 
 function Layout({ children }) {
     return (
@@ -20,7 +19,7 @@ function Layout({ children }) {
                 pauseOnHover
                 transition={Slide}
             />
-            <Auth />
+            <Header />
             {children}
         </div>
     );
