@@ -1,20 +1,27 @@
 import React from 'react';
-// import { useNavigate } from 'react-router-dom';
-import { Col, Container, Nav, Navbar } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import { Col, Container, Navbar } from 'react-bootstrap';
 
 import Auth from '../../components/Auth/Auth';
 import Search from '../../components/Search/Search';
 import OffCanvas from './OffCanvas/OffCanvas';
+import Navigation from '../../Pages/Navigation/Navigation';
 
 const Header = () => {
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
+
+    function navigateTo(path) {
+        if (path !== null && path !== undefined) {
+            navigate(path);
+        }
+    }
 
     return (
         <Navbar
             bg="light"
             variant="light"
             fixed="top"
-            // onSelect={eventKey => navigate(eventKey)}
+            onSelect={eventKey => navigateTo(eventKey)}
         >
             <Col xs="auto" sm="auto">
                 <Container>
@@ -26,25 +33,9 @@ const Header = () => {
                     <Search />
                 </Container>
             </Col>
-            <Navbar.Toggle aria-controls="off-canvas-nav-bar" />
             <Col xs={{ span: true, offset: 1 }} sm={{ span: true, offset: 1 }}>
                 <Container>
-                    <Nav variant="pills" justify activeKey="/">
-                        <Nav.Item>
-                            <Nav.Link eventKey="/getting-started">
-                                Getting Started
-                            </Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link eventKey="/">Home</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link eventKey="/my-crew">My Crew</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link eventKey="/about-us">About Us</Nav.Link>
-                        </Nav.Item>
-                    </Nav>
+                    <Navigation />
                 </Container>
             </Col>
             <Col

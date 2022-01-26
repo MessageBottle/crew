@@ -1,10 +1,11 @@
 import React from 'react';
 import { ToastContainer, Slide } from 'react-toastify';
 
-import 'react-toastify/dist/ReactToastify.css';
 import Header from './Header/Header';
 
-function Layout({ children }) {
+import 'react-toastify/dist/ReactToastify.css';
+
+const Layout = ({ children }) => {
     return (
         <div className="Layout">
             <ToastContainer
@@ -23,6 +24,6 @@ function Layout({ children }) {
             {children}
         </div>
     );
-}
+};
 
 export default Layout;
