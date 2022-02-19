@@ -20,7 +20,6 @@ const Header = () => {
         <Navbar
             bg="light"
             variant="light"
-            fixed="top"
             onSelect={eventKey => navigateTo(eventKey)}
         >
             <Col xs="auto" sm="auto">
