@@ -1,2 +1,0 @@
-(this.webpackJsonpcrew=this.webpackJsonpcrew||[]).push([[0],{157:function(e,n,t){},158:function(e,n,t){"use strict";t.r(n);var a=t(0),i=t.n(a);t(157);n.default=function(){return i.a.createElement("div",null,"Hello this is home page and also the only page we have right now.")}}}]);
-//# sourceMappingURL=0.ee5d34a8.chunk.js.map
