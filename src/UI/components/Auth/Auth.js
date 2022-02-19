@@ -1,28 +1,33 @@
 import React, { useEffect } from 'react';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { toast } from 'react-toastify';
+import { Button, Dropdown, Spinner } from 'react-bootstrap';
 
 import { auth, signIn, signOut } from '../../../firebase/OAuth';
-// import { userSignedIn } from '../../store/actions';
+import {
+    getUserFromStore,
+    userSignedIn,
+    userSignedOut,
+} from '../../store/features/userSlice';
 
-import { Button, Dropdown, Spinner } from 'react-bootstrap';
 import { openInNewTab } from '../../utils/utils';
 
 import './Auth.css';
+import { postUserId } from '../../../firebase/actions';
 
 const Auth = () => {
     const [user, initialising] = useAuthState(auth);
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         if (user) {
-            // dispatch(userSignedIn(user));
+            dispatch(userSignedIn(user));
             toast.success(`Welcome! ${user.displayName}`);
+        } else {
+            dispatch(userSignedOut());
         }
-    }, [user]);
-
-    console.log(initialising, user);
+    }, [user, dispatch]);
 
     return (
         <Dropdown align="end">
@@ -54,6 +59,19 @@ const Auth = () => {
                     }}
                 >
                     Report a bug! (on GitHub)
+                </Dropdown.Item>
+                <Dropdown.Item
+                    onClick={() => {
+                        postUserId(() => {
+                            const userAuth = getUserFromStore().auth;
+                            return {
+                                name: userAuth.displayName,
+                                email: userAuth.email,
+                            };
+                        });
+                    }}
+                >
+                    {`Add user to dev DB, login-staus: ${!!user}`}
                 </Dropdown.Item>
                 {user ? (
                     <>

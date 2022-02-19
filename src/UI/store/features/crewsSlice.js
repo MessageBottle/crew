@@ -1,9 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSelector, createSlice } from '@reduxjs/toolkit';
+
+import store from '../store';
 
 const initialState = { data: {} };
 
 const slice = createSlice({
-    name: 'crew',
+    name: 'crews',
     initialState,
     reducers: {
         getCrewSucceded: (state, { payload }) => {
@@ -17,8 +19,13 @@ const slice = createSlice({
 
 export const { getCrewSucceded, postCrewSucceded } = slice.actions;
 
-export function selectCrew(pathFn = x => x) {
-    return state => pathFn(state.crew);
+const selectCrews = createSelector(
+    state => state.crews,
+    crews => crews
+);
+
+export function getCrewsFromStore() {
+    return selectCrews(store.getState());
 }
 
 export default slice.reducer;

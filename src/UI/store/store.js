@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import crewReducer from './features/crewSlice';
+import crewsReducer from './features/crewsSlice';
 import userReducer from './features/userSlice';
 
 const store = configureStore({
     reducer: {
-        crew: crewReducer,
+        crews: crewsReducer,
         user: userReducer,
     },
     middleware: getDefaultMiddleware =>
