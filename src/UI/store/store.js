@@ -1,17 +1,21 @@
-import { applyMiddleware, createStore } from 'redux';
-import { composeWithDevTools } from '@redux-devtools/extension';
-import createSagaMiddleware from 'redux-saga';
+import { configureStore } from '@reduxjs/toolkit';
 
-import rootReducer from './reducers';
-import rootSaga from './sagas';
+import crewReducer from './features/crewSlice';
+import userReducer from './features/userSlice';
 
-const sagaMiddleWare = createSagaMiddleware();
-
-const store = createStore(
-    rootReducer,
-    composeWithDevTools(applyMiddleware(sagaMiddleWare))
-);
-
-sagaMiddleWare.run(rootSaga);
+const store = configureStore({
+    reducer: {
+        crew: crewReducer,
+        user: userReducer,
+    },
+    middleware: getDefaultMiddleware =>
+        getDefaultMiddleware({
+            // TODO: remove these ignores for non-serializability of userImpl which is received from firebase
+            serializableCheck: {
+                ignoredActions: ['user/userSignedIn'],
+                ignoredPaths: ['user.data'],
+            },
+        }),
+});
 
 export default store;
