@@ -15,8 +15,7 @@ function App() {
             <BrowserRouter basename={process.env.REACT_APP_CREW_BASE_URL}>
                 <Layout>
                     <Suspense
-                        fallback={<Spinner animation="border" variant="dark" />}
-                    >
+                        fallback={<Spinner animation="border" variant="dark" />}>
                         <Pages />
                     </Suspense>
                 </Layout>
