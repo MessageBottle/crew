@@ -19,6 +19,7 @@ const Layout = ({ children }) => {
                 draggable
                 pauseOnHover
                 transition={Slide}
+                closeButton={false}
             />
             <Header />
             {children}

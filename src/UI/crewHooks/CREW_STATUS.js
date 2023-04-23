@@ -1,0 +1,2 @@
+export const FAILED = 'FAILED';
+export const NOT_FAILED = 'SUCCEEDED/LOADING/NOT-TRIGGERED';

@@ -1,44 +1,48 @@
-import React, { useEffect } from 'react';
-// import { useDispatch } from 'react-redux';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { toast } from 'react-toastify';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { Button, Dropdown } from 'react-bootstrap';
 
-import { auth, signIn, signOut } from '../../../firebase/OAuth';
-// import { userSignedIn } from '../../store/actions';
-
-import { Button, Dropdown, Spinner } from 'react-bootstrap';
+import { signIn, signOut } from '../../../firebase/OAuth';
+import {
+    selectActiveUserProfile,
+    selectIsUserSignedIn,
+} from '../../store/user/slice';
 import { openInNewTab } from '../../utils/utils';
+import Loader from '../general/Loader';
 
 import './Auth.css';
 
 const Auth = () => {
-    const [user, initialising] = useAuthState(auth);
-    // const dispatch = useDispatch();
+    const isUserSignedIn = useSelector(store =>
+        selectIsUserSignedIn(store.user)
+    );
 
-    useEffect(() => {
-        if (user) {
-            // dispatch(userSignedIn(user));
-            toast.success(`Welcome! ${user.displayName}`);
-        }
-    }, [user]);
+    const activeUserProfile = useSelector(store =>
+        selectActiveUserProfile(store.user)
+    );
 
-    console.log(initialising, user);
+    const [loading, setLoading] = useState(false);
 
     return (
         <Dropdown align="end">
-            {user ? (
-                <img src={user.photoURL} className="avatar" alt="avatar" />
+            {isUserSignedIn ? (
+                <img
+                    src={activeUserProfile.photoURL}
+                    className="avatar"
+                    alt="avatar"
+                />
             ) : (
                 <Button
                     variant="outline-dark"
-                    onClick={signIn}
-                    disabled={initialising}
+                    onClick={() => {
+                        setLoading(true);
+                        signIn().finally(() => {
+                            setLoading(false);
+                        });
+                    }}
+                    disabled={loading}
                 >
-                    {initialising ? (
-                        <Spinner animation="border" size="sm" variant="dark" />
-                    ) : (
-                        'Sign In'
-                    )}
+                    {loading ? <Loader /> : 'Sign In'}
                 </Button>
             )}
             <Dropdown.Toggle
@@ -55,10 +59,19 @@ const Auth = () => {
                 >
                     Report a bug! (on GitHub)
                 </Dropdown.Item>
-                {user ? (
+                {isUserSignedIn ? (
                     <>
-                        <Dropdown.Header>{user.displayName}</Dropdown.Header>
-                        <Dropdown.Item onClick={signOut}>
+                        <Dropdown.Header>
+                            {activeUserProfile.displayName}
+                        </Dropdown.Header>
+                        <Dropdown.Item
+                            onClick={() => {
+                                setLoading(true);
+                                signOut().finally(() => {
+                                    setLoading(false);
+                                });
+                            }}
+                        >
                             Sign out
                         </Dropdown.Item>
                     </>
